@@ -1,0 +1,55 @@
+alarms = [
+    {"tag": "P101", "severity": "high", "message": "Pump overload"},
+    {"tag": "T202", "severity": "medium", "message": "Temperature high"},
+    {"tag": "V303", "severity": "high", "message": "Valve feedback error"},
+    {"tag": "M404", "severity": "low", "message": "Motor vibration"},
+    {"tag": "P105", "severity": "medium", "message": "Pressure unstable"},
+]
+
+def find_message(alarms,mess):
+    for i in alarms:
+        if i["message"] == mess:
+            return i
+    return None
+
+       
+def filter_alarms_by_severity(alarms, sev):
+    new = [] 
+    for i in alarms:
+        if i["severity"] == sev:
+            new.append(i)
+    return new        
+        
+        
+def get_high_alarm_tags(alarms,sev):
+    new = []
+    for i in alarms:
+        if i["severity"] == sev:
+            new.append(i["tag"])
+    return new
+        
+def find_alarm_by_severity(alarms, severity):
+    for i in alarms:
+        if i["severity"] == severity:
+            return i
+    return None
+
+def get_alarm_messages_by_severity(alarms, severity):
+    new = []
+    for i in alarms:
+        if i["severity"] == severity:
+            new.append(i["message"])
+    return new
+
+def count_alarms_by_severity(alarms, severity):
+    count = 0
+    for i in alarms:
+        if i["severity"] == severity:    
+            count += 1
+    return count
+    
+    
+print(find_alarm_by_severity(alarms, "low"))
+print(find_alarm_by_severity(alarms, "critical"))
+print(get_alarm_messages_by_severity(alarms, "medium"))
+print(count_alarms_by_severity(alarms, "high"))
