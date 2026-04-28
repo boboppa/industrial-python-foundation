@@ -1,0 +1,25 @@
+alarms = [
+    {"tag": "P101", "severity": "high", "message": "Pump overload"},
+    {"tag": "T202", "severity": "medium", "message": "Temperature high"},
+    {"tag": "V303", "severity": "high", "message": "Valve feedback error"},
+    {"tag": "M404", "severity": "low", "message": "Motor vibration"},
+    {"tag": "P105", "severity": "medium", "message": "Pressure unstable"},
+]
+
+def sabm(alarms):
+    return sorted (alarms, key = lambda al: al["message"])
+
+def sta(alarms):
+    res = []
+    for al in alarms: 
+        res.append(al["tag"])
+    return sorted(res)
+
+def gstbs(alarms, severity):
+    res = []
+    for al in alarms:
+        if al["severity"] == severity:
+            res.append(al["tag"])
+    return sorted(res)
+
+print(gstbs(alarms,"medium"))

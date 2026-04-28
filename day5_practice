@@ -1,0 +1,34 @@
+alarms = [
+    {"tag": "P101", "severity": "high", "message": "Pump overload"},
+    {"tag": "T202", "severity": "medium", "message": "Temperature high"},
+    {"tag": "V303", "severity": "high", "message": "Valve feedback error"},
+    {"tag": "M404", "severity": "low", "message": "Motor vibration"},
+    {"tag": "P105", "severity": "medium", "message": "Pressure unstable"},
+]
+
+
+def btsbs(alarms):
+    sum = {
+        "high" : [],
+        "medium" : [],
+        "low" : []
+    }
+    
+    for al in alarms: 
+        sev = al["severity"]
+        sum[sev].append(al["tag"])
+
+    return sum
+
+def bcas(alarms):
+    sum = []
+    
+    for al in alarms:
+        dict = {
+            "tag" : al["tag"],
+            "severity" : al["severity"]
+        }
+        sum.append(dict)
+    return sum
+
+print(bcas(alarms))
