@@ -1,0 +1,43 @@
+import csv
+
+
+def read_csv(filename):
+    res = []
+    
+    with open (filename, newline="") as file:
+        reader = csv.DictReader(file)
+        
+        for row in reader: 
+            res.append(row)
+    return res
+
+def gaa(filename, status):
+    new = read_csv(filename)
+    res = []
+    for al in new:
+        if al["status"] == status:
+            res.append(al)
+            
+    return res
+
+
+def gaba(filename, area):
+    new = read_csv(filename)
+    res = []
+    for al in new:
+        if al["area"] == area:
+            res.append(al)
+            
+    return res
+
+
+def gaha(filename, status, sev):
+    new = read_csv(filename)
+    res = []
+    for al in new:
+        if al["status"] == status and al["severity"] == sev :
+            res.append(al)
+            
+    return res
+#print(read_csv("alarms_day8.csv"))
+print(gaha("alarms_day8.csv","ACTIVE","HIGH"))

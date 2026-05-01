@@ -1,0 +1,6 @@
+tag,severity,message
+P101,high,Pump overload
+T202,medium,Temperature high
+V303,high,Valve feedback error
+M404,low,Motor vibration
+P105,medium,Pressure unstable
