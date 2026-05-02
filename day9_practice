@@ -1,0 +1,56 @@
+import csv
+
+
+def read_csv(filename):
+    res = []
+    
+    with open(filename, newline="") as file:
+        reader = csv.DictReader(file)
+        
+        for row in reader: 
+            res.append(row)
+    return res
+
+
+def active_alarm_summary(filename, status):
+    data = read_csv(filename)
+    res = []
+    
+    for al in data:
+        if al["status"] == status:
+            res.append({
+               "tag" : al["tag"],
+               "severity" : al["severity"]
+            }) 
+    return res
+
+
+def active_alarms_sorted_by_tag(filename,status):
+    data = read_csv(filename)
+    res = []
+    
+    for al in data:
+        if al["status"] == status:
+            res.append(al)
+    
+    res.sort(key=lambda al:al["tag"])
+    return res
+
+
+def area_alarm_summary(filename, area):
+    data = read_csv(filename)
+    res = []
+    
+    for al in data:
+        if al["area"] == area:
+            res.append({
+                "tag" :al["tag"],
+                "severity" : al["severity"],
+                "status" : al["status"]
+            })
+    res.sort(key=lambda al:al["tag"])
+    return res
+    
+
+
+print(area_alarm_summary("alarms_day8.csv","PROC"))
