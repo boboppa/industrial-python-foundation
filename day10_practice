@@ -1,0 +1,64 @@
+import csv
+
+def read_csv(filename):
+    res = []
+    
+    with open(filename, newline="") as file:
+        reader = csv.DictReader(file)
+        
+        for row in reader: 
+            res.append(row)
+    return res
+
+
+def count_by_severity(filename):
+    data = read_csv(filename)
+    summary = {}
+    
+    for alarm in data: 
+        sev = alarm["severity"]
+        
+        if sev not in summary:
+            summary[sev] = 0
+        summary[sev]  += 1
+    return summary
+            
+            
+
+
+
+def count_active_by_area (filename,status):
+    data = read_csv(filename)
+    summary = {}
+    
+    for alarm in data: 
+        if alarm["status"] == status: 
+            ar = alarm["area"]
+        
+            if ar not in summary: 
+                summary[ar] = 0
+        
+          
+            summary[ar] += 1
+    return summary
+
+
+
+
+
+def count_by_status(filename):
+    
+    data = read_csv(filename)
+    summary = {}
+    
+    for alarm in data: 
+        stat = alarm["status"]
+        
+        if stat not in summary:
+            summary[stat] = 0
+        
+        summary[stat] +=1
+        
+    return summary
+
+print(count_by_status("alarms_day8.csv"))
