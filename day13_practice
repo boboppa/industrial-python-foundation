@@ -1,0 +1,58 @@
+import csv
+
+def read_csv(filename):
+    
+    res = []
+    with open(filename, newline="") as file:
+        reader = csv.DictReader(file)
+        
+        for now in reader:
+            res.append(now)
+    return res
+
+
+def get_complete_alarms(filename):
+    data = read_csv(filename)
+    res = []
+    
+    for alarm in data:
+        if alarm["tag"] != "" and alarm["area"] != "" and alarm["severity"] != "" and alarm["status"] != "" : 
+            res.append(alarm)
+            
+    return res
+    
+#print(get_complete_alarms("alarms_dirty.csv"))
+
+def get_valid_severity_alarms(filename):
+    data = read_csv(filename)
+    sev_gut = ["HIGH", "MEDIUM","LOW"]
+    res = []
+    
+    for alarm in data:
+        if alarm["severity"] in sev_gut:
+            res.append(alarm)
+            
+    return res
+
+#print(get_valid_severity_alarms("alarms_dirty.csv"))
+
+def count_valid_invalid_rows(filename):
+    data = read_csv(filename)
+    summary = {
+        "valid" : 0,
+        "invalid" : 0
+    }
+    
+    sev_gut = ["HIGH", "MEDIUM","LOW"]
+    stat_gut = ["ACTIVE","CLEARED"]
+    
+    for alarm in data: 
+        if alarm["tag"] != "" and alarm["area"] != "" and alarm["severity"] in sev_gut and alarm["status"] in stat_gut:
+
+            summary["valid"] += 1
+        else:
+            summary["invalid"] += 1
+    return summary   
+    
+print(count_valid_invalid_rows("alarms_dirty.csv"))        
+        
