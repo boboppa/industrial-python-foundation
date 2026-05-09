@@ -1,0 +1,90 @@
+import csv
+
+def read_csv(filename):
+    res = []
+    
+    with open (filename, newline="") as file:
+        reader = csv.DictReader(file)
+        
+        for now in reader:
+            res.append(now)
+            
+    return res
+
+def severity_report(filename):
+    data = read_csv(filename)
+    summary = {}
+    
+    for alarm in data:
+        sev = alarm["severity"]
+        
+        if sev not in summary:
+            summary[sev] = 0
+        
+        summary[sev] += 1
+    
+    text = []
+    for new in summary:
+        text.append({
+            "severity" : new,
+            "count" : summary[new]
+        })
+    text.sort(key=lambda item:item["severity"])
+    return text
+
+def write_csv(filename,fieldnames, data):
+    with open (filename, "w", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+    
+        writer.writeheader()
+        writer.writerows(data)
+        
+data = severity_report("alarms_day8.csv")
+
+def active_area_report(filename, status):
+    data = read_csv(filename)
+    summary = {}
+    
+    for alarm in data: 
+        if alarm["status"] == status:
+            area  = alarm["area"]
+            if area not in summary:
+                summary[area] = 0
+            summary[area] += 1
+    
+    res = []
+    for new in summary:
+        res.append({
+            "area" : new,
+            "count" : summary[new]
+        })
+        
+    res.sort(key=lambda item:item["area"], reverse=True)
+        
+    return res
+            
+def status_report(filename):
+    data = read_csv(filename)
+    summary = {}
+    
+    for alarm in data:
+        status = alarm["status"]
+        
+        if status not in summary:
+            summary[status] = 0
+        summary[status] += 1
+    
+    res = []
+    for new in summary:
+        res.append({
+            "status" : new,
+            "count" : summary[new]
+        })
+    
+    res.sort(key=lambda item:item["count"], reverse=True)
+
+    return res
+data = status_report("alarms_day8.csv")
+print(status_report("alarms_day8.csv"))
+
+write_csv("severity_report.csv", ["status", "count"], data)
