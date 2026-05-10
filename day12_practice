@@ -39,7 +39,7 @@ def write_csv(filename,fieldnames, data):
         writer.writeheader()
         writer.writerows(data)
         
-data = severity_report("alarms_day8.csv")
+#data = severity_report("alarms_day8.csv")
 
 def active_area_report(filename, status):
     data = read_csv(filename)

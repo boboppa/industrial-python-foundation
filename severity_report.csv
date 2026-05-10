@@ -1,3 +1,4 @@
-status,count
-ACTIVE,4
-CLEARED,2
+severity,count
+HIGH,3
+LOW,2
+MEDIUM,1
