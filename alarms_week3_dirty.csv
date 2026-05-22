@@ -1,0 +1,16 @@
+tag,area,status,priority
+ALM001,boiler,active,high
+ALM002,pump,cleared,low
+ALM003,boiler,active,medium
+ALM004,conveyor,active,high
+ALM005,pump,active,medium
+ALM006,tank,cleared,low
+ALM007,boiler,,low
+ALM008,tank,active,critical
+ALM009,,active,high
+ALM010,pump,cleared,low
+ALM011,boiler,active,high
+ALM012,conveyor,cleared,medium
+ALM013,tank,active,high
+ALM014,pump,active,
+ALM015,packaging,active,medium
