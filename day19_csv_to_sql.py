@@ -57,15 +57,5 @@ rows = cursor.fetchall()
 for row in rows:
     print(row)
 
-print("count alarm by area")
-cursor.execute("""
-select area, count(*) from alarms
-group by area
-               """)
-rows = cursor.fetchall()
-
-for row in rows:
-    print(row)
-
-conn.close()
+  
 

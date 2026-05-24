@@ -1,0 +1,11 @@
+tag,area,status,priority
+ALM001,boiler,active,high
+ALM002,pump,cleared,low
+ALM003,boiler,active,medium
+ALM004,turbine,active,high
+ALM005,pump,unknown,low
+ALM006,,active,high
+,boiler,cleared,medium
+ALM008,turbine,active,critical
+ALM009,boiler,cleared,low
+ALM010,pump,active,medium
