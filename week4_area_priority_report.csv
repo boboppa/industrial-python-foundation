@@ -1,0 +1,7 @@
+area,priority,count
+boiler,high,1
+boiler,low,1
+boiler,medium,1
+pump,low,1
+pump,medium,1
+turbine,high,1

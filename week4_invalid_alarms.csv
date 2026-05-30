@@ -1,0 +1,5 @@
+tag,area,status,priority
+ALM005,pump,unknown,low
+ALM006,,active,high
+,boiler,cleared,medium
+ALM008,turbine,active,critical
