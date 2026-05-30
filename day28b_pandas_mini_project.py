@@ -4,29 +4,23 @@ def read_alarm_data(filename):
     df = pd.read_csv(filename)
     return df
 
-def get_valid_alarms(df):
+
+def get_valid_condition(df):
     valid_status = ["active", "cleared"]
     valid_priority =  ["high","medium","low"]
-    valid_condition = (
-        df["tag"].notna() & 
+    return (df["tag"].notna() & 
         df["area"].notna() &
         df["status"].isin(valid_status) &
-        df["priority"].isin(valid_priority)
-    )
-    
-    return df[valid_condition] 
+        df["priority"].isin(valid_priority))
+def get_valid_alarms(df):
+    valid_condition = get_valid_condition(df)
+    valid_alarm = df[valid_condition]
+    return valid_alarm 
     
 def get_invalid_alarms(df):
-    valid_status = ["active", "cleared"]
-    valid_priority =  ["high","medium","low"]
-    valid_condition = (
-        df["tag"].notna() & 
-        df["area"].notna() &
-        df["status"].isin(valid_status) &
-        df["priority"].isin(valid_priority)
-    )
-    
-    return df[~valid_condition] 
+    valid_condition = get_valid_condition(df)
+    invalid_alarm = df[~valid_condition]
+    return invalid_alarm  
 
 def create_area_report(valid_alarms):
     area_rp = valid_alarms.groupby("area").size().reset_index(name="count")
@@ -51,14 +45,14 @@ def create_summary_report(df, valid_alarms, invalid_alarms):
     summary = pd.DataFrame(new_col)
     return summary
     
-def export_reports(df,valid_alarms, invalid_alarms):
-    get_valid_alarms(df).to_csv("week4_valid_alarms.csv",index = False)
-    get_invalid_alarms(df).to_csv("week4_invalid_alarms.csv", index = False)
-    create_area_report(valid_alarms).to_csv("week4_area_report.csv", index = False)
-    create_priority_report(valid_alarms).to_csv("week4_priority_report.csv",index = False)
-    create_active_area_report(valid_alarms).to_csv("week4_active_area_report.csv", index = False)
-    create_area_priority_report(valid_alarms).to_csv("week4_area_priority_report.csv", index = False)
-    create_summary_report(df,valid_alarms,invalid_alarms).to_csv("week4_summary_report.csv", index = False)
+def export_reports(area_rp,priority_rp,active_area_rp,area_prio_rp,summary, valid_alarms, invalid_alarms):
+    valid_alarms.to_csv("week4_valid_alarms.csv",index = False)
+    invalid_alarms.to_csv("week4_invalid_alarms.csv", index = False)
+    area_rp.to_csv("week4_area_report.csv", index = False)
+    priority_rp.to_csv("week4_priority_report.csv",index = False)
+    active_area_rp.to_csv("week4_active_area_report.csv", index = False)
+    area_prio_rp.to_csv("week4_area_priority_report.csv", index = False)
+    summary.to_csv("week4_summary_report.csv", index = False)
     
 def main():
     df = read_alarm_data("alarms_week4_dirty.csv")
@@ -66,19 +60,23 @@ def main():
     valid_alarms = get_valid_alarms(df)
     invalid_alarms = get_invalid_alarms(df)
 
-    #area_report = create_area_report(valid_alarms)
-    #priority_report = create_priority_report(valid_alarms)
-    #active_area_report = create_active_area_report(valid_alarms)
-    #area_priority_report = create_area_priority_report(valid_alarms)
-    summary_report = create_summary_report(df, valid_alarms, invalid_alarms)
+    area_rp = create_area_report(valid_alarms)
+    priority_rp = create_priority_report(valid_alarms)
+    active_area_rp = create_active_area_report(valid_alarms)
+    area_prio_rp = create_area_priority_report(valid_alarms)
+    summary = create_summary_report(df, valid_alarms, invalid_alarms)
 
     export_reports(
-        df,
+        area_rp,
+        priority_rp,
+        active_area_rp,
+        area_prio_rp,
+        summary,
         valid_alarms,
         invalid_alarms
     )
 
-    print(summary_report)
+    print(summary)
     print("Mini project completed")
 
 
