@@ -1,7 +1,4 @@
-area,priority,count
-boiler,high,1
-boiler,low,1
-boiler,medium,1
-pump,low,1
-pump,medium,1
-turbine,high,1
+area,status,count
+PM1,ok,1
+PM1,warning,1
+PM3,error,1

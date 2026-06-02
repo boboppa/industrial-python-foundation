@@ -1,4 +1,7 @@
 sensor_id,area,value,unit,status
 S001,PM1,55.2,C,ok
 S002,PM1,60.1,C,warning
+S003,PM2,,C,ok
+S004,,44.0,C,ok
 S005,PM3,77.5,bar,error
+S006,PM2,30.0,C,invalid

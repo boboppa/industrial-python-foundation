@@ -1,5 +1,4 @@
-tag,area,status,priority
-ALM005,pump,unknown,low
-ALM006,,active,high
-,boiler,cleared,medium
-ALM008,turbine,active,critical
+sensor_id,area,value,unit,status
+S003,PM2,,C,ok
+S004,,44.0,C,ok
+S006,PM2,30.0,C,invalid
