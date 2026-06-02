@@ -1,4 +1,6 @@
-sensor_id,area,value,unit,status
-S003,PM2,,C,ok
-S004,,44.0,C,ok
-S006,PM2,30.0,C,invalid
+sensor_id,area,temperature,status
+T002,PM1,130.0,ok
+T003,PM2,,warning
+T004,PM2,-10.0,ok
+T006,,75.0,ok
+T008,PM1,60.0,invalid

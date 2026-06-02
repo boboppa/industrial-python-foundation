@@ -1,4 +1,9 @@
 sensor_id,area,temperature,status
 T001,PM1,65.5,ok
+T002,PM1,130.0,ok
+T003,PM2,,warning
+T004,PM2,-10.0,ok
 T005,PM3,80.0,warning
+T006,,75.0,ok
 T007,PM3,90.0,error
+T008,PM1,60.0,invalid

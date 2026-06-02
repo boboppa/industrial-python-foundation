@@ -1,4 +1,4 @@
 area,status,count
 PM1,ok,1
-PM1,warning,1
 PM3,error,1
+PM3,warning,1
