@@ -1,0 +1,6 @@
+sensor_id,area,equipment,temperature,status
+T003,PM1,Pump_B,130.0,ok
+T006,PM2,Motor_B,,ok
+T008,PM3,Pump_C,-5.0,ok
+T009,,Motor_C,75.0,ok
+T010,PM3,Motor_C,95.0,invalid

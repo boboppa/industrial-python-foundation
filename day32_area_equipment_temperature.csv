@@ -1,0 +1,4 @@
+area,equipment,min_temperature,max_temperature,mean_temperature
+PM1,Pump_A,65.5,70.0,67.75
+PM2,Motor_A,80.0,85.0,82.5
+PM3,Pump_C,90.0,90.0,90.0

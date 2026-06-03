@@ -1,0 +1,4 @@
+area,min_temperature,max_temperature,mean_temperature
+PM3,90.0,90.0,90.0
+PM2,80.0,85.0,82.5
+PM1,65.5,70.0,67.75
