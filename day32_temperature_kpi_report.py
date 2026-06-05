@@ -87,6 +87,8 @@ def main():
     summary = create_summary_report(df, valid_readings, invalid_readings)
     print(summary)
     export_reports(valid_readings, invalid_readings, area_temp_kpi, area_equipment_kpi, high_temperature_alerts, status_report, summary )
+
+
 if __name__ == "__main__":
     main()
     

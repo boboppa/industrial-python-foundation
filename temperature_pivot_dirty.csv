@@ -1,0 +1,14 @@
+sensor_id,area,equipment,temperature,status
+T001,PM1,Pump_A,65.5,ok
+T002,PM1,Pump_A,70.0,ok
+T003,PM1,Motor_A,72.0,warning
+T004,PM1,Motor_A,130.0,ok
+T005,PM2,Motor_A,80.0,warning
+T006,PM2,Motor_A,85.0,ok
+T007,PM2,Pump_B,78.0,ok
+T008,PM2,Pump_B,,ok
+T009,PM3,Pump_C,90.0,error
+T010,PM3,Pump_C,95.0,ok
+T011,PM3,Motor_C,-5.0,ok
+T012,,Motor_C,75.0,ok
+T013,PM3,Motor_C,88.0,invalid
