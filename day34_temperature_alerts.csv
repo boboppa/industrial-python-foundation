@@ -1,0 +1,6 @@
+sensor_id,area,equipment,temperature,status,temperature_margin,is_high_temperature,temperature_status
+T002,PM1,Pump_A,88.0,ok,3.0,True,high
+T006,PM2,Motor_A,85.0,ok,0.0,True,high
+T007,PM2,Pump_B,91.0,ok,6.0,True,critical
+T009,PM3,Pump_C,90.0,error,5.0,True,critical
+T010,PM3,Pump_C,95.0,ok,10.0,True,critical

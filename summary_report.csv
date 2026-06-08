@@ -1,4 +1,5 @@
 metric,count
-Total rows,10
-Valid_rows,5
-Invalid_rows,5
+Total rows,13
+Valid rows,8
+Invalid rows,5
+Alerts rows,5
