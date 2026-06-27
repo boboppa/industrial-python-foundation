@@ -104,6 +104,7 @@ def main():
     export_reports(valid_readings, invalid_readings, enriched_readings, readings_with_status, alerts, temperature_status_report, temp_matrix, sorted_matrix,summary)
     print(sorted_matrix)
     print(temp_matrix)
+
 if __name__ == "__main__":
     main()
     
