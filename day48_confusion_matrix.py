@@ -3,6 +3,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
+import numpy as np
+
 
 
 def create_feature_matrix(ml_ready_table):
@@ -115,7 +117,7 @@ def create_confusion_matrix(y_test, y_pred):
     cm = confusion_matrix(y_test, y_pred, labels=[0,1])
     return cm
 
-def create_confusion_matrix_report(cm, y_test, y_pred):
+def create_confusion_matrix_report(cm):
     confusion_matrix_report = pd.DataFrame([{
         "true_negative" : cm[0,0],
         "false_positive" : cm[0,1],
@@ -125,9 +127,30 @@ def create_confusion_matrix_report(cm, y_test, y_pred):
     return confusion_matrix_report
 
 def add_prediction_error_type(prediction_report):
+    choices = ["true_positive", "true_negative", "false_positive", "false_negative"]
+    conditions = [(prediction_report["actual_critical"] == 1) & (prediction_report["predicted_critical"] == 1),
+                  (prediction_report["actual_critical"] == 0) & (prediction_report["predicted_critical"] == 0),
+                  (prediction_report["actual_critical"] == 0) & (prediction_report["predicted_critical"] == 1),
+                  (prediction_report["actual_critical"] == 1) & (prediction_report["predicted_critical"] == 0)]
+        
     prediction_report_with_error_type = prediction_report.assign(
-        prediction_type =  
+        prediction_type =  np.select(conditions, choices, default="normal")
     )
+    
+    return prediction_report_with_error_type
+
+def validate_confusion_matrix_report(confusion_matrix_report):
+    confusion_matrix_validation_report = pd.DataFrame([{
+        "has_true_positive" : "true_positive" in confusion_matrix_report.columns,
+        "has_true_negative" : "true_negative" in confusion_matrix_report.columns,
+        "has_false_positive" : "false_positive" in confusion_matrix_report.columns,
+        "has_false_negative" : "false_negative" in confusion_matrix_report.columns,                
+        "all_counts_non_negative" : (confusion_matrix_report >= 0).all().all()
+    }])
+    
+    return confusion_matrix_validation_report
+    
+
 def main():
     ml_ready_table = pd.DataFrame({
     "temperature": [70.0, 78.0, 82.0, 96.0, 91.0, 65.0, 79.0, 105.0],
@@ -190,7 +213,13 @@ def main():
 
     cm = create_confusion_matrix(y_test, y_pred)
     print(cm)
-    confusion_matrix_report = create_confusion_matrix_report(cm, y_test, y_pred)
+    confusion_matrix_report = create_confusion_matrix_report(cm)
     print(confusion_matrix_report)
+    
+    prediction_report_with_error_type = add_prediction_error_type(prediction_report)
+    print(prediction_report_with_error_type)
+    confusion_matrix_validation_report = validate_confusion_matrix_report(confusion_matrix_report)
+    print(confusion_matrix_validation_report)
+    
 if __name__ == "__main__":
     main() 
