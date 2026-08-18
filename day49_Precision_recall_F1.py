@@ -174,10 +174,13 @@ def classify_metric_level(metric_value):
     
     
 def create_metric_interpretation_report(classification_metric_report):
+    precision = classification_metric_report["precision"].iloc[0]
+    recall = classification_metric_report["recall"].iloc[0]
+    f1 =  classification_metric_report["f1_score"].iloc[0]
     metric_interpretation_report = pd.DataFrame([{
-        "precision_level" : classification_metric_report["precision"].iloc[0] >= 0.8,
-        "recall_level" : classification_metric_report["recall"] >= 0.5,
-        "f1_score" : classification_metric_report["f1"] < 0.5
+        "precision_level" : classify_metric_level(precision),
+        "recall_level" : classify_metric_level(recall),
+        "f1_level" : classify_metric_level(f1)
     }])
     return metric_interpretation_report
     
@@ -185,8 +188,8 @@ def validate_classification_metric_report(classification_metric_report):
     classification_metric_validation_report = pd.DataFrame([{
         "has_precision" : "precision" in classification_metric_report.columns,
         "has_recall" : "recall" in classification_metric_report.columns,
-        "has_f1_score" : "f1" in classification_metric_report.columns,
-        "all_metrics_in_valid_range" : (0 <= classification_metric_report <= 1).all().all() 
+        "has_f1_score" : "f1_score" in classification_metric_report.columns,
+        "all_metrics_in_valid_range" : ((classification_metric_report >= 0) & (classification_metric_report <= 1)).all().all() 
     }])  
     return classification_metric_validation_report
 
